@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+<script>
+function arrayToTree(array) {
+  const map = new Map(); // 使用 Map 来存储每个节点，以便能够快速通过 ID 查找节点
+  const tree = [];
+
+  // 遍历数组，创建节点并存储在 Map 中
+  array.forEach(item => {
+    map.set(item.id, { ...item, children: [] });
+  });
+
+  // 遍历数组，将每个节点放入其父节点的 children 数组中
+  array.forEach(item => {
+    if (item.parentId !== null) {
+      map.get(item.parentId).children.push(map.get(item.id));
+    } else {
+      tree.push(map.get(item.id)); // 根节点的 parentId 通常为 null
+    }
+  });
+  return tree;
+}
+
+// 示例数组
+const dataArray = [
+  { id: 1, parentId: null, name: 'Node 1' },
+  { id: 2, parentId: 1, name: 'Node 1.1' },
+  { id: 3, parentId: 1, name: 'Node 1.2' },
+  { id: 4, parentId: 2, name: 'Node 1.1.1' },
+  { id: 5, parentId: 2, name: 'Node 1.1.2' },
+  { id: 6, parentId: null, name: 'Node 2' },
+  // ... 可以继续添加更多节点
+];
+
+// 转换数组为树状结构
+const treeStructure = arrayToTree(dataArray);
+
+console.log(treeStructure);
+
+
+const map = new Map();
+const tree = [];
+array.forEach((val)=>{
+    map.set(val.id,{...val,children:[]})
+})
+map.forEach
+</script>
+</html>

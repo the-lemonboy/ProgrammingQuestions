@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+  class _Promise {
+  static PENDING = '待定';
+  static FULFILLED = '成功';
+  static REJECTED = '拒绝';
+
+  constructor(func) {
+    this.status = _Promise.PENDING;
+    this.result = null;
+    this.resolveCallbacks = [];
+    this.rejectCallbacks = [];
+    try {
+      func(this.resolve.bind(this), this.reject.bind(this));
+    } catch (error) {
+      this.reject(error);
+    }
+  }
+
+  resolve(result) {
+    setTimeout(() => {
+      if (this.status === _Promise.PENDING) {
+        this.status = _Promise.FULFILLED;
+        this.result = result;
+        this.resolveCallbacks.forEach(callback => {
+          callback(result);
+        });
+      }
+    });
+  }
+
+  reject(result) {
+    setTimeout(() => {
+      if (this.status === _Promise.PENDING) {
+        this.status = _Promise.REJECTED;
+        this.result = result;
+        this.rejectCallbacks.forEach(callback => {
+          callback(result);
+        });
+      }
+    });
+  }
+
+
+  then(onFULFILLED, onREJECTED) {
+    return new _Promise((resolve, reject) => {
+      onFULFILLED = typeof onFULFILLED === 'function' ? onFULFILLED : () => {};
+      onREJECTED = typeof onREJECTED === 'function' ? onREJECTED : () => {};
+
+      const fulfillCallback = () => {
+        try {
+          const result = onFULFILLED(this.result);
+          resolve(result);
+        } catch (error) {
+          reject(error);
+        }
+      };
+
+      const rejectCallback = () => {
+        try {
+          const result = onREJECTED(this.result);
+          resolve(result);
+        } catch (error) {
+          reject(error);
+        }
+      };
+
+      if (this.status === _Promise.PENDING) {
+        this.resolveCallbacks.push(fulfillCallback);
+        this.rejectCallbacks.push(rejectCallback);
+      }
+
+      if (this.status === _Promise.FULFILLED) {
+        setTimeout(() => {
+          fulfillCallback();
+        });
+      }
+
+      if (this.status === _Promise.REJECTED) {
+        setTimeout(() => {
+          rejectCallback();
+        });
+      }
+    });
+  }
+}
+
+// 示例用法
+let promise = new _Promise((resolve, reject) => {
+  resolve('isresolve');
+  reject('isreject')
+});
+
+promise.then(result => {
+    console.log(result); // 输出 "isresolve"
+    return 'first_then_result'; // 返回一个值作为后续 then 方法的参数
+  })
+  .then(result => {
+    console.log(result); // 输出 "first_then_result"
+    return 'second_then_result'; // 返回另一个值作为后续 then 方法的参数
+  })
+  .then(result => {
+    console.log(result); // 输出 "second_then_result"
+  });
+
+</script>
+</html>
