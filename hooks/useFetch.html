@@ -1,0 +1,68 @@
+<script src="https://unpkg.com/vue"></script>
+<div id="app"></div>
+<script>
+const { createApp, watchEffect, ref} = Vue
+
+
+function useFetch(getUrl){
+    const data = ref(null)
+    const error = ref(null)
+    const isPending = ref(true) // 设置为 true 以表示初始加载状态
+
+    watchEffect(() => {
+        isPending.value = true  // 开始加载时设置为 true
+        fetch(getUrl())
+        .then(res => res.json()) // 解析 JSON
+        .then(_data => {
+            data.value = _data
+            isPending.value = false  // 加载完成
+        })
+        .catch(err => {
+            error.value = err
+            isPending.value = false  // 出现错误后停止加载
+        })
+    })
+
+    return {
+        data,
+        error,
+        isPending
+    }
+}
+
+const Post = {
+    template: `
+        <div v-if="isPending">Loading...</div>
+        <div v-else-if="error">Error: {{ error.message }}</div>
+        <div v-else>Post: {{ data.title }}</div> <!-- 假设展示的是 title -->
+    `,
+    props: ['id'], // 接收 id 作为 props
+    setup(props){
+        const { data, error, isPending } = useFetch(
+            () => `https://jsonplaceholder.typicode.com/todos/${props.id}`
+        )
+        return {
+            data,
+            error,
+            isPending
+        }
+    }
+}
+
+const App = {
+    components: { Post },
+    data() {
+        return {
+            id: 1
+        }
+    },
+    template: `
+        <div>
+            <button @click="id++">Next Post</button>
+            <Post :id="id" />
+        </div>
+    `
+}
+
+createApp(App).mount('#app')
+</script>

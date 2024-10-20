@@ -1,3 +1,5 @@
+const { default: config } = require("uview-plus/libs/config/config")
+
 function deepClone(obj){
     if(typeof obj === 'object' && obj !== null){
         let result = Array.isArray(obj) ? [] : {}
@@ -25,4 +27,3 @@ function shallowClone(obj) {
     }
     return newObj;
 }
-

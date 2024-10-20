@@ -1,0 +1,70 @@
+<script src="https://unpkg.com/vue"></script>
+<div id="app"></div>
+<script type="module">
+     import { createApp, ref,watch } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js';
+     import { useTimer } from './userTimer.js';
+
+
+    // function useTimer(initialTime) {
+    //     const time = ref(initialTime * 1000)
+    //     let timerInterval = null
+    //     const start = () => {
+    //         if (timerInterval) return // 避免重复启动
+    //         timerInterval = setInterval(() => {
+    //             time.value -= 1000
+    //             if (time.value <= 0) {
+    //                 time.value = 0
+    //                 stop() // 时间到了自动停止
+    //             }
+    //         }, 1000)
+    //     }
+
+    //     // 停止计时
+    //     const stop = () => {
+    //         clearInterval(timerInterval)
+    //         timerInterval = null // 清除计时器后将其重置为 null
+    //     }
+
+    //     // 重置时间
+    //     const reset = (newTime) => {
+    //         stop() // 重置时先停止计时器
+    //         time.value = newTime * 1000
+    //     }
+
+    //     return {
+    //         time,
+    //         start,
+    //         stop,
+    //         reset
+    //     }
+    // }
+
+    const App = {
+        template: `
+            <div>
+                <button @click="start">Start</button>
+                <button @click="stop">Stop</button>
+                <button @click="reset(10)">Reset</button>
+                <div>Time left: {{ formattedTime }}</div>
+            </div>
+        `,
+        setup() {
+            const { time, start, stop, reset } = useTimer(10) // 初始化时间为 10 秒
+            const formattedTime = ref('')
+
+            // 监听 time 的变化，格式化为秒数
+            watch(time, (newTime) => {
+                formattedTime.value = `${Math.floor(newTime / 1000)}s`
+            })
+
+            return {
+                start,
+                stop,
+                reset,
+                formattedTime
+            }
+        }
+    }
+
+    createApp(App).mount('#app')
+</script>

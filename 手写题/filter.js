@@ -16,7 +16,8 @@ Array.prototype.MyFilter2 = function(func,thisArgs){
     const result = []
     let curArray = this
     for(let i = 0; i<curArray.length; i++){
-        // thisArgs确保this指向func内部
+        // thisArgs确保this指向func内部    curArray是filter的第一个参数，i是filter第二个参数序号
+        // 逻辑: func绑定参数，如果func正确就push
         if(func.call(thisArgs,curArray[i],i,curArray)){
             result.push(curArray[i])
         }

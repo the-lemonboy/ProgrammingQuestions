@@ -18,3 +18,4 @@ function throttle(fn, delay) {
       }
     };
   }
+ 

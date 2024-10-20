@@ -41,9 +41,6 @@ class _Promise {
         }
       });
     }
-  
-  
-  
     then(onFULFILLED, onREJECTED) {
       return new _Promise((resolve, reject) => {  //实现链式调用
         onFULFILLED = typeof onFULFILLED === 'function' ? onFULFILLED : () => {};  //如果不是function传空函数，防止resolve不是函数

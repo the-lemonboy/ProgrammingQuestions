@@ -1,7 +1,8 @@
+
 function myPromiseAll(promiseArr){
     return new Promise((resolve,reject)=>{
         if(!Array.isArray(promiseArr)){
-            console.error(reject+"pr")
+            console.error(reject+"promise")
         }
         const res = []
         let counter = 0
@@ -18,3 +19,6 @@ function myPromiseAll(promiseArr){
         } 
     })
 }
+
+
+// Promise.resolve(value)包裹value为promise
