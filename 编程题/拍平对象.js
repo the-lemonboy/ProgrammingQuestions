@@ -1,45 +1,8 @@
 
-// {
-//     "a": {
-//       "b": {
-//         "c": {
-//           "d": 1
-//         }
-//       }
-//     },
-//     "aa": 2,
-//     "c": [
-//       1,
-//       2
-//     ]
-//   } =>
-//   { 'a.b.c.d': 1, aa: 2, 'c[0]': 1, 'c[1]': 2 }
-  // 对象扁平化
-// function flattenObject(obj, parentKey = '') {
-//     const result = {};
-  
-//     for (let key in obj) {
-//       if (obj.hasOwnProperty(key)) {
-//         let newKey = parentKey ? `${parentKey}.${key}` : key;
-//         if (typeof obj[key] === 'object' && obj[key] !== null && !Array.isArray(obj[key])) {
-//           // 如果属性是对象并且不是数组，则递归扁平化
-//           Object.assign(result, flattenObject(obj[key], newKey));
-//         } else if (Array.isArray(obj[key])) {
-//           // 如果属性是数组，则将数组每个元素都扁平化
-//           obj[key].forEach((item, index) => {
-//             let arrayKey = `${newKey}[${index}]`;
-//             Object.assign(result, flattenObject({ [arrayKey]: item }));
-//           });
-//         } else {
-//           // 否则直接添加到结果中
-//           result[newKey] = obj[key];
-//         }
-//       }
-//     }
-  
-//     return result;
-//   }
-  
+  // 思路： 1）、遍历对象； 2）、是否有parentkey；3）、判断当前是数组还是对象
+  // 用Object.assign()，遍历对象，将值添加到result中
+  // 如果是数组，将数组每个元素都添加到result中
+
 function flattenObject(obj, parantKey = ''){
   let result = {}
   for(let key in obj){
@@ -78,6 +41,7 @@ function flattenObject(obj, parantKey = ''){
   };
   
   const flattenedObject = flattenObject(nestedObject);
+  console.log(flattenedObject);
   
 
 

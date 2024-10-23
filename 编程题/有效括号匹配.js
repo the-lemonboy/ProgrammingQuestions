@@ -48,4 +48,3 @@ function isValid(s) {
         }
     }
 }
-console.log(Object.prototype.toString.call(bracketValid.entries().next().value))

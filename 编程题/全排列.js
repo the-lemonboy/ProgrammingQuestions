@@ -6,7 +6,7 @@
  */
 var permute = function (nums) {
     const res = [], path = [];
-
+    backtracking(nums,nums.length,[])
     function backtracking(n,k,used){
         if(path.length === k){
             res.push(Array.from(path));
@@ -21,7 +21,6 @@ var permute = function (nums) {
             used[i] = false
         }
     }
-    backtracking(nums,nums.length,[])
     return res
 };
 

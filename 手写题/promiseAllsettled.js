@@ -17,3 +17,6 @@ Promise.myAllSettled = function (alls) {
       });
     });
   };
+
+
+  

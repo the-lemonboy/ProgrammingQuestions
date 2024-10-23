@@ -42,3 +42,4 @@ function sortFirst(arr) {
 
 const result = sortFirst([12, 3, 24, 1, 932, 6423]);
 console.log(result); // 输出：[1, 3, 12, 24, 6423, 932]
+
