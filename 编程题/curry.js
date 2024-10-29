@@ -19,3 +19,19 @@ function add() {
 console.log(add(1, 2)(1)()); // 输出：4
 console.log(add(1)(2)(3)(4)()); // 输出：10
 console.log(add(5)()); // 输出：5
+
+// 其他curry实现
+function curry(fn) {
+  let length = fn.length;
+  let params = []
+  return function patical(x) {
+    params.push(x);
+    if(params.length === length) {
+      return fn(...params);
+    }else{
+      return patical
+    }
+  };
+}
+const testCurry = curry((a, b, c) => a + b + c);
+console.log(testCurry(1)(2)(3));

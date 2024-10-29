@@ -13,6 +13,7 @@ async function asyncPool({limit,items}){
     for(let item of items){
     const fn = async item => await item()
     const promise = fn(item)
+    promises.push(promise)
     pool.add(promise)
     const clean = ()=> pool.delete(promise)
     promise.then(clean,clean)
@@ -44,6 +45,24 @@ function asyncPool(limit,items){
     })
   }
 }
+// -----------------------https://github.com/rxaviers/async-pool/blob/1.x/lib/es7.js
+async function asyncPool(poolLimit, iterable, iteratorFn) {
+  const ret = [];
+  const executing = new Set();
+  for (const item of iterable) {
+    const p = Promise.resolve().then(() => iteratorFn(item, iterable));
+    ret.push(p);
+    executing.add(p);
+    const clean = () => executing.delete(p);
+    p.then(clean).catch(clean);
+    if (executing.size >= poolLimit) {
+      await Promise.race(executing);
+    }
+  }
+  return Promise.all(ret);
+}
+
+module.exports = asyncPool;
 
 //  ----------------方法二
 // 运行池
@@ -198,21 +217,3 @@ concurrentRequests(urls, limit)
   module.exports = asyncPool;
 
 
-// -----------------------https://github.com/rxaviers/async-pool/blob/1.x/lib/es7.js
-  async function asyncPool(poolLimit, iterable, iteratorFn) {
-    const ret = [];
-    const executing = new Set();
-    for (const item of iterable) {
-      const p = Promise.resolve().then(() => iteratorFn(item, iterable));
-      ret.push(p);
-      executing.add(p);
-      const clean = () => executing.delete(p);
-      p.then(clean).catch(clean);
-      if (executing.size >= poolLimit) {
-        await Promise.race(executing);
-      }
-    }
-    return Promise.all(ret);
-  }
-  
-  module.exports = asyncPool;
