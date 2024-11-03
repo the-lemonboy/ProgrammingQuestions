@@ -45,4 +45,21 @@ function flattenObject(obj, parantKey = ''){
   
 
 
- 
+ function nextedObject(obj,parentKey){
+  let res = {}
+  if(typeof obj === 'object' && obj !== null){
+    for(let key in obj){
+      let newKey = parantKey ? `${parantKey}.${key}` : key
+      if(obj.hasOwnProperty(key)){
+        if(Object.prototype.toString.call(obj[key]){
+          Object.assign(res,nextedObject(obj[key],newKey))
+        })else if(Array.isArray(obj[key])){
+          // const 
+          obj[key].forEach(item=>{
+            Object.assign(res,nextedObject({item,}))
+          })
+        }
+      }
+    }
+  }
+ }
