@@ -128,3 +128,6 @@ tree.filter(item=>item.root)
   // 测试用例
   const tree = arrayToTree(list);
   console.log(JSON.stringify(tree, null, 2));
+
+
+

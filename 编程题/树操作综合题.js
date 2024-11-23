@@ -84,7 +84,6 @@ let test = arrayToTree(arrs,0)
 function deepTree(nodes){
     let res = []
    function deep(nodes){
- 
     nodes.forEach(node=>{
         res.push(node.id)
         if(node.children){
@@ -100,3 +99,6 @@ function rangeTree(nodes){
     
 }
 console.log(fn(test))
+
+
+// https://bigfrontend.dev/zh/problem/Next-Right-Sibiling

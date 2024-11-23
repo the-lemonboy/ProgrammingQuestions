@@ -21,16 +21,6 @@ async function sleep(n,name='test'){
         await Promise.race(pool)
     }
 }
-  // items.forEach(async(item) => {
-  //   const promise = await item()
-  //   promises.push(promise)
-  //   pool.add(promise)
-  //   const clean = () => pool.delete(promise)
-  //   promise.then(clean, clean)
-  //   if (pool.size >= limit) {
-  //     await Promise.race(pool)
-  //   }
-  // })
 return Promise.all(promises)
 }
 async function start(){

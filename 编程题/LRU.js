@@ -32,6 +32,7 @@ export class LRUCache {
       console.table(this.cache)
     }
   }
+import { SplitNode } from 'three/webgpu';
   // ./index.ts
   import {LRUCache} from './lru'
   const list = new LRUCache(4)
@@ -70,6 +71,3 @@ export class LRUCache {
         return [key,value]
     }
   }
-
-
-  

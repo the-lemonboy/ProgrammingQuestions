@@ -19,7 +19,6 @@ class Notifier { //通知者
       })
   }
 }
-
 class Observer {//观察者
   constructor(name){
       this.name = name
