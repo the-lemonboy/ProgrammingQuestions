@@ -11,6 +11,14 @@ function myObjectCreate(proto){
     obj.__proto__ = proto
     return obj
   }
+
+  // 法三
+  function MyCreate(obj){
+    function fn(){}
+    fn.prototype = obj
+    fn.prototype.construct = fn
+    return new fn()
+}  
 // Example usage
 const person = {
   firstName: "John",
@@ -19,6 +27,8 @@ const person = {
     return this.firstName + " " + this.lastName;
   },
 };
+
+
 
 const anotherPerson = createObject(person);
 anotherPerson.firstName = "Jane";

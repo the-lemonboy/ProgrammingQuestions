@@ -1,3 +1,4 @@
+
 // Array.prototype.myMap = function(fn, thisArg)：将自定义的 map 方法添加到数组原型上，使得所有数组实例都可以调用这个方法。这个方法接受两个参数：fn 是要对数组中的每个元素执行的回调函数，thisArg 是执行回调函数时的 this 指向。
 
 // if (typeof fn !== 'function') { throw new Error() }：首先检查传入的回调函数是否是一个函数，如果不是则抛出错误。

@@ -13,3 +13,4 @@ Function.prototype.MyApply = function (thisArg, args) {
   delete thisArg.func;
   return result;
 };
+

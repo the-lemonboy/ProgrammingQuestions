@@ -16,15 +16,15 @@ var permute = function (nums) {
             if(used[i]) continue
             used[i] = true
             path.push(n[i])
+            // 递归
             backtracking(n,k,used)
+            // 回溯
             path.pop();
             used[i] = false
         }
     }
     return res
 };
-
-
 
 /**
  * 全排列二
@@ -56,3 +56,9 @@ var permuteUnique = function(nums) {
         }
     }
 };
+
+
+// 快排
+function quicksort(){
+    let pivot = 
+}

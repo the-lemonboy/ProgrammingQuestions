@@ -19,20 +19,51 @@ function debounce(func, delay) {
 // 换句话说，当 immediate 为 true 时，函数 fn 会在首次调用时立即执行，然后在后续的 delay 毫秒内不会再次执行，直到定时器到期后才会允许再次立即执行。
 function debounce2(fn, delay, immediate) {
   let timer = null;
-  return function() {
+  return function () {
     const context = this;
     const args = arguments;
-      timer && clearTimeout(timer);
-      if(immediate) {
-          const doNow = !timer;
-          timer = setTimeout(() => {
-              timer = null;
-          }, delay);
-          doNow && fn.apply(context, args);
-      }else {
-          timer = setTimeout(() => {
-              fn.apply(context, args);
-          }, delay);
-      }
+    timer && clearTimeout(timer);
+    if (immediate) {
+      const doNow = !timer;
+      timer = setTimeout(() => {
+        timer = null;
+      }, delay);
+      doNow && fn.apply(context, args);
+    } else {
+      timer = setTimeout(() => {
+        fn.apply(context, args);
+      }, delay);
+    }
   };
 }
+
+
+// 法三
+/**
+ * 
+ * @param {回调} func 
+ * @param {等待时间} wait 
+ * @param {选项} option
+ * leading 是否立即执行
+ * trailing 是否在延迟后执行 
+ */
+  function debounce(func, wait, option = {leading: false, trailing: true}) {
+    let timer = null
+    return function(...args) {
+      let isInvoked = false
+      // if not cooling down and leading is true, invoke it right away
+      if (timer === null && option.leading) {
+        func.call(this, ...args)
+        isInvoked = true
+      }
+      // no matter what, timer needs to be reset
+      window.clearTimeout(timer)
+      timer = window.setTimeout(() => {
+        if (option.trailing && !isInvoked) {
+          func.call(this, ...args)
+        }
+        timer = null
+      }, wait)
+    }
+  }
+  

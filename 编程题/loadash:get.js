@@ -8,3 +8,12 @@ function get(source, path, defaultValue) {
         else curNode = curNode[i]
     }
 }
+
+
+ // 法二
+ function get(source, path, defaultValue) {
+    const paths = typeof path === 'string' ? path.match(/[^\[\]\.]+/g) : path
+    if (!(paths && paths.length)) return;
+    const res = paths.reduce((acc,cur)=> acc && acc[cur],source)
+    return res || defaultValue
+ }

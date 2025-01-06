@@ -132,17 +132,7 @@ class MyPromise {
 
   static all(promises) {
     const results = [];
-    static resolve(value) {
-      return new MyPromise((resolve) => {
-        resolve(value);
-      });
-    }
-  
-    static reject(value) {
-      return new MyPromise((resolve, reject) => {
-        reject(value);
-      });
-    }    return new MyPromise((resolve, reject) => {
+  return new MyPromise((resolve, reject) => {
       for (let i = 0; i < promises.length; i++) {
         const promise = promises[i];
         promise
@@ -199,6 +189,7 @@ class MyPromise {
           rejectedPromises++;
           errors[i] = value;
           if (rejectedPromises === promises.length) {
+            // 等到所有的promise都被rejected后，再reject
             reject(new AggregateError(errors, "All promises were rejected"));
           }
         });

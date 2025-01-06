@@ -2,7 +2,7 @@
   // 思路： 1）、遍历对象； 2）、是否有parentkey；3）、判断当前是数组还是对象
   // 用Object.assign()，遍历对象，将值添加到result中
   // 如果是数组，将数组每个元素都添加到result中
-
+//？？？ Object.assign(result,flattenObject({[newArray]:item}))为什么不用再传入key？
 function flattenObject(obj, parantKey = ''){
   let result = {}
   for(let key in obj){
@@ -43,23 +43,20 @@ function flattenObject(obj, parantKey = ''){
   const flattenedObject = flattenObject(nestedObject);
   console.log(flattenedObject);
   
-
-
- function nextedObject(obj,parentKey){
-  let res = {}
-  if(typeof obj === 'object' && obj !== null){
+ function flattenObject(obj,defaultKey = ''){
+    let res = {}
     for(let key in obj){
-      let newKey = parantKey ? `${parantKey}.${key}` : key
       if(obj.hasOwnProperty(key)){
-        if(Object.prototype.toString.call(obj[key]){
-          Object.assign(res,nextedObject(obj[key],newKey))
-        })else if(Array.isArray(obj[key])){
-          // const 
-          obj[key].forEach(item=>{
-            Object.assign(res,nextedObject({item,}))
+       let  newKey = defaultKey ? `${defaultKey}.${key}` : key
+        if(Object.prototype.toString.call(obj[key]) === '[object Object]'){
+          Object.assign(res,flattenObject(obj[key], newKey))
+        }else if(Array.isArray(obj[key])){
+          obj[key].forEach((item,index)=>{
+            Object.assign(res,flattenObject(item,`${newKey}.[${index}]`))
           })
+        }else{
+          res[key] = obj[key]
         }
       }
     }
-  }
  }

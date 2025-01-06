@@ -8,7 +8,8 @@ class Notifier { //通知者
   remove(obj){
      let index = this.observerList.findIndex((o) => {
          return o === obj
-      })//找到 删除对象的索引
+      })
+      //找到 删除对象的索引
       if(index >= 0) {
           this.observerList.splice(index,1)
       }

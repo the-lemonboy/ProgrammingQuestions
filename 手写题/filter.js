@@ -24,10 +24,3 @@ Array.prototype.MyFilter2 = function(func,thisArgs){
     }
     return result
 }
-
-
-
-let a = [1,2,2,4,5,6]
-let res = a.MyFilter2((item,i)=>{
-    return a>3
-})

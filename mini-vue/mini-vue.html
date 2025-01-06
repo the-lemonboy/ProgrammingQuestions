@@ -13,7 +13,6 @@
             for (const key in vnode.props) {
                 const value = vnode.props[key];
                 if (key.startsWith('on')) {
-                    console.log(key.slice(2).toLowerCase())
                     el.addEventListener(key.slice(2).toLowerCase(), value)
                 } else {
                     el.setAttribute(key, value);
@@ -39,7 +38,6 @@
             const oldProps = n1.props || {}
             const newProps = n2.props || {}
             for (const key in newProps) {
-                console.log(oldProps[key], newProps[key])
                 const oldValue = oldProps[key]
                 const newValue = newProps[key]
                 if (newValue !== oldValue) {

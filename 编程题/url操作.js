@@ -29,3 +29,10 @@ const getURLParam = (url, param) => {
   console.log(gender);  // {"key":1,"value":"男"}
   const address = getURLParam(url2, 'address');
   console.log(address);  // 天府二？三街
+
+
+  // searchParams 获取参数
+  // search   所以参数value和key的字符串
+  // host 域名+端口   https默认443、http默认80
+  // hostname  域名
+  // origin  

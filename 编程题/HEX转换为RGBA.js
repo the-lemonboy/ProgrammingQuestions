@@ -14,3 +14,4 @@ const hexToRgba = (hex) => {
       .map((hex) => parseInt(hex, 16))
     return `rgba(${r},${g},${b},${Math.round(a / 255 * 100) / 100})`
   }
+

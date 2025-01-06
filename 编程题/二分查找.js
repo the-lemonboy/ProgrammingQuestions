@@ -1,4 +1,4 @@
-// floor:向下取整
+// floor:向下取整，ceil：向上取整，round：四舍五入
 function binarySearch(arr, target) {
   // 核心：改变left或者right的指向
    let left = 0;

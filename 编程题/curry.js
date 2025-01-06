@@ -1,3 +1,5 @@
+// https://bigfrontend.dev/zh/problem/create-a-sum/discuss  相关题目
+
 function add() {
   // 创建空数组来维护所有要 add 的值
   const args = [];
