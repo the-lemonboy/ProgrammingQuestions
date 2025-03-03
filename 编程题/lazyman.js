@@ -17,7 +17,6 @@
 // Hi This is Hank!
 // Eat supper~
 // 以此类推。
-
 function LazyMan(name) {
     if(!(this instanceof LazyMan)){
         return new LazyMan(name)
@@ -62,3 +61,72 @@ LazyMan.prototype.next = function(){
     const first = this.cbs.shift()
     first(this.next.bind(this))
 }
+
+
+
+// -------------   法二
+class LazyManClass {
+    constructor(name) {
+      this.name = name;
+      this.tasks = [];
+  
+      // 将打印消息任务加入队列
+      this.tasks.push(() => {
+        console.log(`Hi! This is ${name}!`);
+        this.next();
+      });
+  
+      // 异步执行任务队列
+      setTimeout(() => this.next(), 0);
+    }
+  
+    // 执行队列中的下一个任务
+    next() {
+      const task = this.tasks.shift();
+      if (task) {
+        task();
+      }
+    }
+  
+    // sleep 方法，延迟指定秒数后继续执行任务
+    sleep(seconds) {
+      this.tasks.push(() => {
+        setTimeout(() => {
+          console.log(`Wake up after ${seconds}`);
+          this.next();
+        }, seconds * 1000);
+      });
+      return this;
+    }
+  
+    // sleepFirst 方法，优先延迟指定秒数
+    sleepFirst(seconds) {
+      this.tasks.unshift(() => {
+        setTimeout(() => {
+          console.log(`Wake up after ${seconds}`);
+          this.next();
+        }, seconds * 1000);
+      });
+      return this;
+    }
+  
+    // eat 方法，立即打印内容后继续执行
+    eat(food) {
+      this.tasks.push(() => {
+        console.log(`Eat ${food}~`);
+        this.next();
+      });
+      return this;
+    }
+  }
+  
+  // 工厂函数，便于调用
+  function LazyMan(name) {
+    return new LazyManClass(name);
+  }
+  
+  // 测试用例
+//   LazyMan('Hank');
+//   LazyMan('Hank').sleep(10).eat('dinner');
+  LazyMan('Hank').sleep(10).eat('dinner').eat('supper');
+//   LazyMan('Hank').sleepFirst(5).eat('supper');

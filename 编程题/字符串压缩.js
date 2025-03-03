@@ -42,3 +42,25 @@ var compress = function(chars) {
 
     return write; // 返回压缩后的长度
 };
+
+
+function permute(nums){
+    const path = []
+    const res = []
+    function backTracking(arr,len,used = []){
+        if(path.length === len){
+            const curPath = Array.from(path)
+            res.push(path)
+            return
+        }
+        for(let i=0; i<arr.length; i++){
+            if(used[i-1] === true && arr[i-1] === arr[i]) continue
+            if(used[i]) continue
+            path.push(arr[i])
+            used[i] = true
+            backTracking(arr,len,used)
+            path.pop()
+            used[i] = false
+        }
+    }
+}

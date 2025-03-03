@@ -35,4 +35,4 @@ const getURLParam = (url, param) => {
   // search   所以参数value和key的字符串
   // host 域名+端口   https默认443、http默认80
   // hostname  域名
-  // origin  
+  // origin  = protocol + host

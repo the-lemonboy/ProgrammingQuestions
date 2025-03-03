@@ -18,3 +18,4 @@ function compareVersions(versions) {
     return 0;
   });
 }
+

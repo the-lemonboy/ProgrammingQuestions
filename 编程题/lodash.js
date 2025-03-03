@@ -9,17 +9,17 @@ function func(num) {
   onced(2)
   // 1，因为已经调用过了，前一次的结果被直接返回
   // -----------用例---------------
-function once(fn){
-    let isCalled = false
-    let res = null
-    return function(...args){
-        if(!called){
-            res = fn.call(this,...args)
-            called = false
-        }
-        return res
-    }
-}
+  function once(fn) {
+    let isCalled = false;  // 标记函数是否已被调用
+    let res = null;         // 存储第一次调用的返回值
+    return function(...args) {
+      if (!isCalled) {      // 如果函数尚未被调用
+        res = fn.call(this, ...args);  // 执行函数并保存结果
+        isCalled = true;     // 设置标记，表示函数已经调用过
+      }
+      return res;           // 返回第一次调用时的结果
+    };
+  }
 
 // memo
 // https://bigfrontend.dev/zh/problem/implement-general-memoization-function
@@ -47,3 +47,42 @@ function memo(func, resolver) {
       return value;
     }
   }
+
+
+  // https://bigfrontend.dev/zh/problem/implement-lodash-get
+
+function get(source, path, defaultValue = undefined) {
+  // your code here
+  const props = Array.isArray(path)? path: path.replaceAll('[','.').replaceAll(']','').split('.');
+  let curNode = source;
+  for(let i=0;i<props.length;i++){
+    let k = props[i];
+    if(curNode[k] === undefined) return defaultValue;
+    if(i === props.length-1) return curNode[k];
+    else  curNode = curNode[k];
+  }
+}
+const obj = {
+  a: {
+    b: {
+      c: [1,2,3]
+    }
+  }
+}
+get(obj, 'a.b.c') // [1,2,3]
+get(obj, 'a.b.c.0') // 1
+get(obj, 'a.b.c[1]') // 2
+get(obj, ['a', 'b', 'c', '2']) // 3
+get(obj, 'a.b.c[3]') // undefined
+console.log(  get(obj, ['a', 'b', 'c', '2']) )// 'bfe'
+
+//  // 法二
+function get(source, path, defaultValue) {
+  const paths = typeof path === 'string' ? path.match(/[^\[\]\.]+/g) : path
+  if (!(paths && paths.length)) return;
+  // acc存在则return acc[cur]
+  const res = paths.reduce((acc,cur)=> acc && acc[cur],source)
+  return res || defaultValue
+}
+
+

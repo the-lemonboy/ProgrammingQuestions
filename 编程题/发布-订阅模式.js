@@ -23,7 +23,7 @@ class PubSub {
         this.events[type].splice(cbIndex, 1);
       }
     }
-    if (this.events[type].length === 0) {  
+    if (this.events[type].length === 0) {
       delete this.events[type];
     }
   }
@@ -82,7 +82,7 @@ class EventEmitter {
       }
     }
   }
-  
+
   emit(eventName, ...args) {
     const subscriptions = this.subscriptions.get(eventName)
     if (subscriptions) {
@@ -92,3 +92,4 @@ class EventEmitter {
     }
   }
 }
+

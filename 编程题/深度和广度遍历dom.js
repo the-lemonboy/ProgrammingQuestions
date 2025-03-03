@@ -1,6 +1,6 @@
 // https://juejin.cn/post/6844903954673827848?searchId=20240223141835C30B05E9608098AB7392
 const parentDOM = document.getElementById('container');
-function breathTravalSal(node){
+function breathTravelSal(node){
 	const nodes = [];
 	const queue = [];
 	if(node){
@@ -15,7 +15,7 @@ function breathTravalSal(node){
 	}
 	return nodes;
 }
-console.log(breathTravalSal(parentDOM));
+console.log(breathTravelSal(parentDOM));
 
 
 

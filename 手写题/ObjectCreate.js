@@ -4,7 +4,7 @@ function createObject(proto) {
   F.prototype = proto;
   return new F();
 }
-// 法二
+// 法二  推荐
 function myObjectCreate(proto){
     if(typeof proto !== 'object' || proto === null) throw new Error('')
     const obj = {}

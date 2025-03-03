@@ -25,6 +25,7 @@ function clearAllTimeout() {
         callback(...args);
         timers.delete(timerId);
       }
+      // 原SetTimeout返回的id
       const timerId = originSetTimeout(callbackWrapper, time);
       timers.add(timerId);
       return timerId;
@@ -34,7 +35,6 @@ function clearAllTimeout() {
       timers.delete(id);
     }
   })();
-
 
 
   

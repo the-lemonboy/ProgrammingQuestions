@@ -38,7 +38,7 @@ let arrs = [
 // function arrayToTree(list, root) {
 //     const result = [] // 用于存放结果
 //     const map = {} // 用于存放 list 下的节点
-  
+
 //     // 1. 遍历 list，将 list 下的所有节点以 id 作为索引存入 map
 //     for (const item of list) {
 //       map[item.id] = { ...item } // 浅拷贝
@@ -61,42 +61,42 @@ let arrs = [
 //     // 将结果返回
 //     return result
 //   }
-  function arrayToTree(list, root) {
+function arrayToTree(list, root) {
     return list
-      .filter(item => item.parentId === root)
-      .map(item => ({ ...item, children: arrayToTree(list, item.id) }))
-  }
-let test = arrayToTree(arrs,0)
- * Converts a list of nodes into a tree structure.
- * @param {Object[]} list A list of nodes where each node is an object with at least an `id` property.
- * @returns {Object[]} A tree structure where each node has a `children` property that is an array of its children.
+        .filter(item => item.parentId === root)
+        .map(item => ({ ...item, children: arrayToTree(list, item.id) }))
+}
+let test = arrayToTree(arrs, 0)
+    * Converts a list of nodes into a tree structure.
+ * @param { Object[] } list A list of nodes where each node is an object with at least an `id` property.
+ * @returns { Object[] } A tree structure where each node has a `children` property that is an array of its children.
  */
 // console.log(Array.isArray(test))
 // console.log(test)
 // test.forEach(item=>{
-    
+
 //     if(item.children){
 //         arrayToTree(item,item.id)
 //     }
 //     console.log()
 // })
 // 深度遍历
-function deepTree(nodes){
+function deepTree(nodes) {
     let res = []
-   function deep(nodes){
-    nodes.forEach(node=>{
-        res.push(node.id)
-        if(node.children){
-            deep(node.children)
-        }
+    function deep(nodes) {
+        nodes.forEach(node => {
+            res.push(node.id)
+            if (node.children) {
+                deep(node.children)
+            }
         })
     }
     deep(nodes)
     return res
 }
 // 广度遍历
-function rangeTree(nodes){
-    
+function rangeTree(nodes) {
+
 }
 console.log(fn(test))
 

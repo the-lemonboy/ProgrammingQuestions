@@ -47,7 +47,6 @@ class Query {
     this.results = this.results.sort(callback);
     return this;
   }
-
   groupBy(key) {
     const groups = new Map();
     this.results.forEach((item) => {
@@ -84,3 +83,5 @@ const result = new Query(list)
   .execute();
 
 console.log(result);
+
+

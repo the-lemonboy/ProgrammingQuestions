@@ -37,5 +37,3 @@ notifier.add(observer2)
 
 notifier.remove(observer1) //测试删除
 notifier.notify();
-
-

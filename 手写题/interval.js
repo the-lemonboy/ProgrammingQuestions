@@ -91,3 +91,7 @@ const myIntervalInstance = (() => {
 function mySetInterval(func, delay, period) {
   return myIntervalInstance.setInterval(func, delay, period)
 }
+
+function myClearInterval(id) {
+  myIntervalInstance.clearInterval(id)
+}

@@ -32,9 +32,7 @@ export class LRUCache {
       console.table(this.cache)
     }
   }
-import { SplitNode } from 'three/webgpu';
   // ./index.ts
-  import {LRUCache} from './lru'
   const list = new LRUCache(4)
   list.put(2,2)   // 入 2，剩余容量3
   list.put(3,3)   // 入 3，剩余容量2
@@ -69,5 +67,29 @@ import { SplitNode } from 'three/webgpu';
         // 优先级前置
         this.cache.set(key,value)
         return [key,value]
+    }
+  }
+
+
+  class LRUCache{
+    constructor(capacity){
+      this.capacity = capacity
+      this.cache = new Map()
+    }
+    get(key){
+      if(this.cache.has(key)){
+        this.cache.delete(key)
+      }
+      this.cache.set(key,key)
+    }
+    set(key, value) {
+      if (this.cache.has(key)) {
+        this.cache.delete(key);
+        //存在则删除，if 结束再提前
+      } else if (this.cache.size >= this.capacity) {
+        // 超过缓存长度,淘汰最近没使用的
+        this.cache.delete(this.cache.keys().next().value);
+      }
+      this.cache.set(key, value);
     }
   }

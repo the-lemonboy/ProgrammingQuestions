@@ -1,0 +1,55 @@
+/* 毛玻璃效果 */
+div{
+    background: rgba(255,255,255,0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);  
+}
+
+/* 滚动条 */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.1);
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+
+/* 用css实现页面整体置灰 */
+body{
+    filter: grayscale(100%);
+}
+
+
+/* 单行文本溢出隐藏 */
+.ellipsis{
+    border: 1px solid #f70505;
+    padding: 8px;
+    width: 400px;
+    overflow: hidden;
+    text-overflow: ellipsis; //文本溢出显示省略号
+    white-space: nowrap; //文本不会换行
+}
+
+/* 多行文本溢出隐藏 */
+.ellipsis {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3; /* 限制最多显示 3 行 */
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+
+  /* 设置高度是宽度的两倍 */
+
+  .element {
+    width: 50vw;  /* 宽度是视口宽度的50% */
+    aspect-ratio: 1 / 2;  /* 高度是宽度的两倍 */
+    background-color: lightblue;
+  }

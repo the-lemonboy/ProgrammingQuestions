@@ -1,0 +1,109 @@
+/* 法一:float */
+.left{ 
+    float: left;
+    width: 200px;
+    height: 500px;
+    background-color: red;
+}
+.right{
+    float: right;
+    width: 200px;
+    height: 500px;
+    background-color: green;
+}
+.center{
+    margin-left: 200px;
+    margin-right: 200px;
+    height: 500px;
+    background-color: blue;
+}
+
+/* 法二: flex */
+.container{
+    display: flex;
+
+}
+.left{
+    width: 200px;
+    height: 500px;
+    background-color: red;
+}
+.right{
+    width: 200px;
+    height: 500px;
+    background-color: green;
+}
+.center{
+    flex: 1;
+    height: 500px;
+    background-color: blue;
+}
+
+/* 法三: position */
+.container{
+    position: relative;
+}
+.left{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 200px;
+    height: 500px;
+    background-color: red;
+}
+.right{
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 200px;
+    height: 500px;
+    background-color: green;
+}
+.center{
+    margin-left: 200px;
+    margin-right: 200px;
+    height: 500px;
+    background-color: blue;
+}
+
+
+/* 法四: table */
+.container{
+    display: table;
+}
+.left{
+    display: table-cell;
+    width: 200px;
+    height: 500px;
+    background-color: red;
+}
+.right{
+    display: table-cell;
+    width: 200px;
+    height: 500px;
+    background-color: green;
+}
+.center{
+    display: table-cell;
+    height: 500px;
+    background-color: blue;
+}
+
+
+/* 法五: grid  */
+.container{
+    display: grid;
+    grid-template-columns: 200px auto 200px;
+}
+.left{
+    height: 500px;
+    background-color: red;
+}
+.right{
+    height: 500px;
+    background-color: green;
+}
+.center{
+    height: 500px;
+    background-color: blue;
+}

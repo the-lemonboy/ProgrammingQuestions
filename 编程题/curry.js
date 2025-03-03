@@ -37,3 +37,27 @@ function curry(fn) {
 }
 const testCurry = curry((a, b, c) => a + b + c);
 console.log(testCurry(1)(2)(3));
+
+
+
+
+
+function sum(...args) {
+  const allArgs = [...args];
+  const fn = (...newArgs) => {
+    allArgs.push(...newArgs);
+    return fn;
+  };
+  fn.sumOf = () => allArgs.reduce((acc, curr) => acc + curr, 0);
+  return fn;
+}
+
+// 设计一个sum函数，使其满足以下要求
+
+sum(1, 2).sumOf() // 返回 3
+console.log(sum(1, 2).sumOf())
+sum(1, 2)(3).sumOf() // 返回 6
+
+sum(1)(2, 3, 4).sumOf() // 返回 10
+
+sum(1, 2)(3, 4)(5).sumOf() // 返回 15

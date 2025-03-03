@@ -37,7 +37,7 @@ function getTreeLeaf(tree){
       }
 
       // 定义一个示例数组
-const list = [
+    const list = [
     { id: 1, parent_id: null, name: 'Node 1' },
     { id: 2, parent_id: 1, name: 'Node 1.1' },
     { id: 3, parent_id: 1, name: 'Node 1.2' },
@@ -53,3 +53,7 @@ const list = [
   
   // 输出转换后的树结构
   console.log(tree);
+
+
+
+  

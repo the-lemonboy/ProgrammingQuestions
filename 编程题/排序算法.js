@@ -1,4 +1,5 @@
 // 插入排序
+// 和前面的比较，插入到最小的位置
 function insertionSort(arr) {
     if(arr.length <= 1) return arr;
     for(let i = 1; i < arr.length; i++) {

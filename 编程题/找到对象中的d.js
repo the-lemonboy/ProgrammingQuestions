@@ -38,6 +38,4 @@ var X = {
   //   return results;
   // }
   console.log(findDValues(X))
-  
-
 

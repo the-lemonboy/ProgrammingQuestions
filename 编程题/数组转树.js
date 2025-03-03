@@ -5,6 +5,8 @@ const city = [
   { "id": 13, "parent_id": 1, "name": "昌平区" },
   { "id": 2421, "parent_id": 242, "name": "上海科技绿洲" }]
 
+
+
 /**
  * 数组转树形结构
  * @param {array} list 被转换的数组
@@ -85,8 +87,6 @@ function arrayToTreeV3(list, root) {
       .filter(item => item.parent_id === root)
       .map(item => ({ ...item, children: arrayToTreeV3(list, item.id) }))
   }
-
-tree.filter(item=>item.root)
   // -------------gpt方法
   const list = [
     { id: 1, name: 'root', parentId: null },
@@ -131,3 +131,83 @@ tree.filter(item=>item.root)
 
 
 
+
+  function arrayToTree(array) {
+    const map = new Map();
+    const forest = [];
+  
+    // 初始化所有节点到 Map 中
+    array.forEach(item => {
+      map.set(item.id, { ...item, children: [] });
+    });
+  
+    // 构建树
+    array.forEach(item => {
+      const node = map.get(item.id);
+      if (item.parentId === null) {
+        // 没有父节点，放入森林作为根节点
+        forest.push(node);
+      } else {
+        // 找到父节点，将当前节点添加到其 children 中
+        const parent = map.get(item.parentId);
+        if (parent) {
+          parent.children.push(node);
+        }
+      }
+    });
+  
+    return forest;
+  }
+
+
+  function arrToTree(arr){
+    let map = new Map()
+    let tree = []
+    arr.forEach(item=>{
+      map.set(item.id,{item,children:[]})
+    })
+    for(let value of arr){
+      const node = map.get(value.id)
+      if(!node.parent_id){
+        tree.push(node)
+      }
+      else{
+        const parent = map.get(node.parent_id)
+        if(parent){
+          parent.children.push(item)
+        }
+      }
+    }
+  }
+
+/* 乌鸫 */
+  const arr = [
+    {id:1, child:[2,3]},
+    {id:2, child:[4]},
+    {id:3, child:[]},
+    {id:4, child:[5]},
+    {id:5, child:[6]}
+  ]
+
+
+  function convertToTree(data) {
+    const nodeMap = {};      // 存储id到节点的映射
+    const childIds = new Set(); // 存储所有子节点的id
+  
+    // 第一次遍历：创建节点并收集子节点id
+    data.forEach(node => {
+      const { child, ...rest } = node;
+      nodeMap[rest.id] = { ...rest, children: [] };
+      child.forEach(id => childIds.add(id));
+    });
+  
+    // 第二次遍历：构建子节点引用
+    data.forEach(node => {
+      const parent = nodeMap[node.id];
+      parent.children = node.child.map(id => nodeMap[id]);
+    });
+  
+    // 找到根节点（没有父节点的节点）
+    const rootId = data.find(node => !childIds.has(node.id))?.id;
+    return nodeMap[rootId];
+  }
