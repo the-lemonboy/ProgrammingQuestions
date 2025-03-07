@@ -94,23 +94,29 @@ var findSubsequences = function(nums) {
 // https://leetcode.cn/problems/combination-sum/
 // 39. 组合总和
 var combinationSum = function(candidates, target) {
-    const res = [], path = [];
-    candidates.sort((a,b)=>a-b); // 排序
-    backtracking(0, 0);
-    return res;
-    function backtracking(j, sum) {
-        if (sum === target) {
-            res.push([...path]);
-            return;
-        }
-        for(let i = j; i < candidates.length; i++ ) {
-            const n = candidates[i];
-            if(n > target - sum) break;
-            path.push(n);
-            sum += n;
-            backtracking(i, sum);
-            path.pop();
-            sum -= n;
-        }
+    let res = [], path = [];
+    
+    function backTracking(startIndex, sum) {
+      // 如果当前和已经大于 target，剪枝，返回
+      if (sum > target) return;
+      // 如果当前和等于 target，找到一个组合，保存
+      if (sum === target) {
+        res.push([...path]);
+        return;
+      }
+      
+      // 遍历候选数组
+      for (let i = startIndex; i < candidates.length; i++) {
+        // 做选择
+        path.push(candidates[i]);
+        // 递归调用，允许重复使用同一个元素，因此 startIndex 不变
+        backTracking(i, sum + candidates[i]);
+        // 回溯，撤销选择
+        path.pop();
+      }
     }
-};
+  
+    // 初始调用，sum 设置为 0，起始位置从 0 开始
+    backTracking(0, 0);
+    return res;
+  };

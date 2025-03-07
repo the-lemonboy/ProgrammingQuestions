@@ -176,15 +176,6 @@ function binarySearch(arr,target){
 }
 
 
-// https://leetcode.cn/problems/jump-game/?envType=study-plan-v2&envId=top-100-liked
-function canJump(nums) {
-    let mx = 0;
-    for (let i = 0; mx < nums.length - 1; i++) {
-        if (i > mx) return false;
-        mx = Math.max(mx, i + nums[i]); // 从 i 最右可以跳到 i + nums[i]
-    }
-    return true;
-};
 
 
 

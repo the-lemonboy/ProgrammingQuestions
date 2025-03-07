@@ -87,14 +87,15 @@ const countSubstrings = (s) => {
 // 不同路径
 
 var uniquePaths = function(m, n) {
-    let dp = Array.from({length:m},()=>{new Array(n).fill(1)})
-    let ans = 0
-    for(let i=0; i<m.length; i++){
-        for(let j=)
+    let dp = Array.from({length:m},()=> new Array(n).fill(1))
+    for(let i=1; i<m; i++){
+        for(let j=1; j<n; j++){
+            dp[i][j] = dp[i-1][j] + dp[i][j-1]
+        }
     }
+    return dp[m-1][n-1]
 };
-
-
+ 
 // https://leetcode.cn/problems/unique-paths/description/
 // 62. 不同路径
 
