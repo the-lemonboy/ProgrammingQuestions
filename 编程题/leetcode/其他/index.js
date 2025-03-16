@@ -13,7 +13,6 @@ var merge = function(intervals) {
     return res
 };
 
-
 // https://leetcode.cn/problems/sliding-window-maximum/description/
 // 滑动窗口最大值
 function maxSlidingWindow(arr, k) {
@@ -136,7 +135,15 @@ function findSame(arr) {
 }
 
 
-
+function findSame(arr){
+    arr.reduce((acc,pre)=>{
+      let count = 0
+      while(acc[count] === pre[count] && acc.length > count && pre.length > count){
+        count ++
+      }  
+      return acc.slice(0,count)
+    })
+}
 
 // 搜索二维矩阵
 // https://leetcode.cn/problems/search-a-2d-matrix/
@@ -178,7 +185,7 @@ function binarySearch(arr,target){
 
 
 
-
+// 53. 最大子数组和
 // https://leetcode.cn/problems/maximum-subarray/description/
 var maxSubArray = function(nums){
     let pre=0, maxNum = nums[0]
@@ -191,34 +198,3 @@ var maxSubArray = function(nums){
 
 
 
-// https://leetcode.cn/problems/trapping-rain-water/description/
-// 接雨水
-//单调栈 js数组作为栈
-var trap = function(height) {
-    const len = height.length;
-    if(len <= 2) return 0; // 可以不加
-    const st = [];// 存着下标，计算的时候用下标对应的柱子高度
-    st.push(0);
-    let sum = 0;
-    for(let i = 1; i < len; i++){
-        if(height[i] < height[st[st.length - 1]]){ // 情况一
-            st.push(i);
-        }
-        if (height[i] == height[st[st.length - 1]]) {  // 情况二
-            st.pop(); // 其实这一句可以不加，效果是一样的，但处理相同的情况的思路却变了。
-            st.push(i);
-        } else { // 情况三
-            while (st.length !== 0 && height[i] > height[st[st.length - 1]]) { // 注意这里是while
-                let mid = st[st.length - 1];
-                st.pop();
-                if (st.length !== 0) {
-                    let h = Math.min(height[st[st.length - 1]], height[i]) - height[mid];
-                    let w = i - st[st.length - 1] - 1; // 注意减一，只求中间宽度
-                    sum += h * w;
-                }
-            }
-            st.push(i);
-        }
-    }
-    return sum;
-};

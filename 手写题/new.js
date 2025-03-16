@@ -6,7 +6,7 @@ function myNew(fn, ...args) {
     let res = fn.call(newObj, ...args)
   
     // 如果执行结果有返回值并且是一个对象, 返回执行的结果, 否则, 返回新创建的对象
-    return res && typeof res === 'object' ? res : newObj;
+    return result instanceof Object ? result : obj
   }
 // 方法二
   function mynew(Func, ...args) {
@@ -18,4 +18,13 @@ function myNew(fn, ...args) {
     let result = Func.apply(obj, args)
     // 4.根据返回值判断
     return result instanceof Object ? result : obj
+}
+
+
+// 法二  推荐
+function myObjectCreate(proto){
+  if(typeof proto !== 'object' || proto === null) throw new Error('')
+  const obj = {}
+  obj.__proto__ = proto
+  return obj
 }

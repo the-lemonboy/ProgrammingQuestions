@@ -42,6 +42,3 @@ function binarySearch(arr, target) {
  const target = 9;
  const resultIndex = binarySearch(arr, target);
  console.log(resultIndex); // 输出: 4
-
-
- 

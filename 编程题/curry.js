@@ -1,5 +1,18 @@
 // https://bigfrontend.dev/zh/problem/create-a-sum/discuss  相关题目
+function add(...args) {
+  let vessel = []; // 存储所有参数
 
+  const curried = (...nums) => {
+    if (nums.length === 0) {
+      return vessel.reduce((acc, pre) => acc + pre, 0); // 计算总和
+    } else {
+      vessel.push(...nums); // 继续收集参数
+      return curried; // 继续返回自己，实现链式调用
+    }
+  };
+
+  return curried(...args);
+}
 function add() {
   // 创建空数组来维护所有要 add 的值
   const args = [];

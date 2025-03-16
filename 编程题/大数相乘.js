@@ -30,4 +30,3 @@ function multiply(num1, num2) {
                 .join('')
                 .replace(/^0+/, '') || '0';
 }
-

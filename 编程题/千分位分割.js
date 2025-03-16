@@ -15,3 +15,6 @@ function format(num) {
 
 console.log(format(98276514321.02)); // 输出 9,876,514,321.02
 console.log(format(1234567));       // 输出 1,234,567
+
+
+

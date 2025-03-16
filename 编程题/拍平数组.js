@@ -36,3 +36,5 @@ function flat2(arr){
   return res
 }
 console.log(flat2(arr))
+
+

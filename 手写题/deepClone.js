@@ -1,4 +1,3 @@
-const { default: config } = require("uview-plus/libs/config/config")
 
 function deepClone(obj){
     if(typeof obj === 'object' && obj !== null){

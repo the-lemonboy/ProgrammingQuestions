@@ -1,17 +1,17 @@
 // https://leetcode.cn/problems/invert-binary-tree/description/
 // 翻转二叉树
-var invertTree = function (root) {
-    // 终止条件
-    if (!root) {
+var invertTree = function(root) {
+  // 终止条件
+  if (!root) {
       return null;
-    }
-    // 交换左右节点
-    const rightNode = root.right;
-    root.right = invertTree(root.left);
-    root.left = invertTree(rightNode);
-    return root;
-  };
-  
+  }
+  // 交换左右节点
+  const left = invertTree(root.left)
+  const right = invertTree(root.right)
+  root.left = right
+  root.right = left
+  return root
+};
   // https://leetcode.cn/problems/sum-of-left-leaves/description/
 // 404. 左叶子之和
 var sumOfLeftLeaves = function(root) {
@@ -114,3 +114,21 @@ var minDepth = function(root) {
   }
   return Math.min(left,right) + 1
 };
+
+
+
+// 101. 对称二叉树
+// https://leetcode.cn/problems/symmetric-tree/description/?envType=study-plan-v2&envId=selected-coding-interview
+var isSymmetric = function(root) {
+  const compareNode = (left,right)=>{
+      if(left === null && right !== null || left !== null && right === null) return false
+      else if(left === null && right === null) return true
+      else if(left.val !== right.val) return false
+      const outSide = compareNode(left.left, right.right)
+      const inSide = compareNode(left.right, right.left)
+      return outSide && inSide
+  }
+return   compareNode(root.left,root.right)
+};
+
+const 

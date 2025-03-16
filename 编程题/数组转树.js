@@ -1,3 +1,5 @@
+const { func } = require("uview-plus/libs/function/test")
+
 const city = [
   { "id": 12, "parent_id": 1, "name": "朝阳区" },
   { "id": 241, "parent_id": 24, "name": "田林街道" },
@@ -98,7 +100,6 @@ function arrayToTreeV3(list, root) {
   ];
   function arrayToTree(items) {
     const itemMap = {};
-    
     // 初始化所有节点到一个字典中
     items.forEach(item => {
       itemMap[item.id] = { ...item, children: [] };
