@@ -43,3 +43,25 @@ function sortFirst(arr) {
 const result = sortFirst([12, 3, 24, 1, 932, 6423]);
 console.log(result); // 输出：[1, 3, 12, 24, 6423, 932]
 
+const Arr = [1, [2, 3, [4, 5]]]
+
+function reverseArr(arr) {
+    return arr.reverse().map(item => {
+        Array.isArray(item) ? item.reverse() : item
+    })
+}
+function reverseArr(arr) {
+    let reversed = [];
+
+    for (let i = arr.length - 1; i >= 0; i--) {
+        if (Array.isArray(arr[i])) {
+            reversed.push(reverseArr(arr[i])); // 递归处理子数组
+        } else {
+            reversed.push(arr[i]); // 直接添加元素
+        }
+    }
+    return reversed;
+}
+
+const arr = [1, [2, 3, [4, 5]]];
+console.log(reverseArr(arr));

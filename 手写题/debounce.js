@@ -51,19 +51,41 @@ function debounce2(fn, delay, immediate) {
     let timer = null
     return function(...args) {
       let isInvoked = false
+      let context = this
       // if not cooling down and leading is true, invoke it right away
       if (timer === null && option.leading) {
-        func.call(this, ...args)
+        func.call(context, ...args)
         isInvoked = true
       }
       // no matter what, timer needs to be reset
       window.clearTimeout(timer)
       timer = window.setTimeout(() => {
+        // isInvoked这里主要是判断是不是第一次执行
         if (option.trailing && !isInvoked) {
-          func.call(this, ...args)
+          func.call(context, ...args)
         }
         timer = null
       }, wait)
+    }
+  }
+
+  // 不需要trailing
+  function  debounce(fn,delay,leading){
+    let timer = null
+    return function(...args){
+      const context = this
+      let isInvoked = false
+      if(timer === null && leading){
+        fn.call(context,...args)
+        isInvoked = true
+      }
+      clearTimeout(timer)
+      timer = setTimeout(()=>{
+        if(!isInvoked){
+          fn.call(context,...args)
+        }
+        timer = null
+      },delay)
     }
   }
 

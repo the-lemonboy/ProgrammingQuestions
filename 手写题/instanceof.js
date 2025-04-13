@@ -12,3 +12,24 @@ function myInstanceof(left, right) {
       proto = Object.getPrototypeOf(proto);
     }
   }
+
+
+  function myInstanceOf(obj, target) {
+    if (obj == null || typeof obj !== 'object') return false; // (1)
+    const proto = Object.getPrototypeOf(obj); // (2)
+    return proto === target.prototype ? true : myInstanceOf(proto, target); // (3)
+  }
+
+
+  interface Todo {
+    title: string
+    description: string
+    completed: boolean
+  }
+  
+  type TodoPreview = MyPick<Todo, 'title' | 'completed'>
+  
+  const todo: TodoPreview = {
+      title: 'Clean room',
+      completed: false,
+  }

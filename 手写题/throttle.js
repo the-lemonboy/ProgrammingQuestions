@@ -51,3 +51,64 @@ function throttle(func, wait, option = {leading: true, trailing: true}) {
     }
   }
 }
+
+function throttle(func, wait, option = {leading: true, trailing: true}) {
+  let waiting = false;
+  let lastArgs = null;
+  return function wrapper(...args) {
+    if(!waiting) {
+      waiting = true;
+      const startWaitingPeriod = () => setTimeout(() => {
+        if(option.trailing && lastArgs) {
+          func.apply(this, lastArgs);
+          lastArgs = null;
+          startWaitingPeriod();
+        }else{
+          waiting = false;
+        }
+        
+      }, wait);
+      if(option.leading) {
+        func.apply(this, args);
+      } else {
+        lastArgs = args; // if not leading, treat like another any other function call during the waiting period
+      }
+      startWaitingPeriod();
+    }
+    else {
+      lastArgs = args; 
+    }
+  }
+}
+
+
+function throttle(fn,wait,option = { leading: true, trailing: true}){
+   let timer = null
+   let wait = false
+   let lastArgs = null
+   const {leading,trailing} = option
+   return function (...args){
+    let context = this
+      if(!wait){
+       const timer = () => setTimeout(()=>{
+        if(trailing && lastArgs){
+          fn.call(context, ...lastArgs)
+          lastArgs = null
+          timer()
+        }else{
+          wait = false
+        }
+       })
+       if(leading){
+        fn.call(context,...args)
+       }else{
+         lastArgs = args
+       }
+       timer()
+      }else{
+        lastArgs = args
+      }
+   }
+}
+
+
