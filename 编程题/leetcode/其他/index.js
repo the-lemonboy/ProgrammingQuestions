@@ -1,12 +1,12 @@
-  // https://leetcode.cn/problems/merge-intervals/description/
+// https://leetcode.cn/problems/merge-intervals/description/
 //   合并区间
-var merge = function(intervals) {
+var merge = function (intervals) {
     intervals.sort((p, q) => p[0] - q[0]);
     const res = []
-    for(let value of intervals){
-        if(res.length && value[0]<=res[res.length-1][1]){
-            res[res.length-1][1] =  Math.max(res[res.length - 1][1], value[1]);
-        }else{
+    for (let value of intervals) {
+        if (res.length && value[0] <= res[res.length - 1][1]) {
+            res[res.length - 1][1] = Math.max(res[res.length - 1][1], value[1]);
+        } else {
             res.push(value)
         }
     }
@@ -24,7 +24,7 @@ function maxSlidingWindow(arr, k) {
     return ans;
 }
 // 方法二
-var maxSlidingWindow = function(nums, k) {
+var maxSlidingWindow = function (nums, k) {
     let res = [];
     for (let i = 0; i <= nums.length - k; i++) {
         let slide = [];
@@ -40,26 +40,20 @@ var maxSlidingWindow = function(nums, k) {
 
 // https://leetcode.cn/problems/longest-substring-without-repeating-characters/description/
 // 无重复字符的最长子串
-var lengthOfLongestSubstring = function(s) {
-    // 哈希集合，记录每个字符是否出现过
-    const occ = new Set();
-    const n = s.length;
-    // 右指针，初始值为 -1，相当于我们在字符串的左边界的左侧，还没有开始移动
-    let rk = -1, ans = 0;
-    for (let i = 0; i < n; ++i) {
-        if (i != 0) {
-            // 左指针向右移动一格，移除一个字符
-            occ.delete(s.charAt(i - 1));
+var lengthOfLongestSubstring = function (s) {
+    const set = new Set();
+    let left = 0, maxLen = 0;
+
+    for (let right = 0; right < s.length; right++) {
+        while (set.has(s[right])) {
+            set.delete(s[left]);
+            left++;
         }
-        while (rk + 1 < n && !occ.has(s.charAt(rk + 1))) {
-            // 不断地移动右指针
-            occ.add(s.charAt(rk + 1));
-            ++rk;
-        }
-        // 第 i 到 rk 个字符是一个极长的无重复字符子串
-        ans = Math.max(ans, rk - i + 1);
+        set.add(s[right]);
+        maxLen = Math.max(maxLen, right - left + 1);
     }
-    return ans;
+
+    return maxLen;
 };
 
 
@@ -67,7 +61,7 @@ var lengthOfLongestSubstring = function(s) {
 
 // // https://leetcode.cn/problems/string-compression/
 // 字符串压缩
-var compress = function(chars) {
+var compress = function (chars) {
     let write = 0; // 写入的位置
     let count = 1; // 记录连续字符的个数
 
@@ -90,7 +84,7 @@ var compress = function(chars) {
     return write; // 返回压缩后的长度
 };
 // 法二
-var compress = function(chars) {
+var compress = function (chars) {
     let ans = []; // 用于存储压缩后的结果
     let count = 0; // 计数连续字符
 
@@ -122,7 +116,7 @@ var compress = function(chars) {
 // 最长公共前缀
 function findSame(arr) {
     if (!arr || arr.length === 0) return '';
-    
+
     return arr.reduce((prefix, current) => {
         let i = 0;
         // 比较当前累积的前缀与当前字符串
@@ -135,13 +129,13 @@ function findSame(arr) {
 }
 
 
-function findSame(arr){
-    arr.reduce((acc,pre)=>{
-      let count = 0
-      while(acc[count] === pre[count] && acc.length > count && pre.length > count){
-        count ++
-      }  
-      return acc.slice(0,count)
+function findSame(arr) {
+    arr.reduce((acc, pre) => {
+        let count = 0
+        while (acc[count] === pre[count] && acc.length > count && pre.length > count) {
+            count++
+        }
+        return acc.slice(0, count)
     })
 }
 
@@ -152,30 +146,30 @@ function findSame(arr){
  * @param {number} target
  * @return {boolean}
  */
-var searchMatrix = function(matrix, target) {
-    for(let i=0; i<=matrix.length-1; i++){
-     const  flag =  binarySearch(matrix[i],target)
-     if(flag === 'next' && i<=matrix.length -1){
-        continue
-     }else if(flag === true){
-        return true
-     }
+var searchMatrix = function (matrix, target) {
+    for (let i = 0; i <= matrix.length - 1; i++) {
+        const flag = binarySearch(matrix[i], target)
+        if (flag === 'next' && i <= matrix.length - 1) {
+            continue
+        } else if (flag === true) {
+            return true
+        }
     }
     return false
 };
-function binarySearch(arr,target){
+function binarySearch(arr, target) {
     let left = 0
     let right = arr.length
-    if(target>arr[right-1] || target<arr[left]){
+    if (target > arr[right - 1] || target < arr[left]) {
         return 'next'
     }
-    for(let i=0; i<=arr.length -1; i++){
-        let mid = Math.floor((left+right)/2)
-        if(arr[mid]>target){
-            right = mid-1
-        }else if(arr[mid]<target){
-            left = mid+1
-        }else{
+    for (let i = 0; i <= arr.length - 1; i++) {
+        let mid = Math.floor((left + right) / 2)
+        if (arr[mid] > target) {
+            right = mid - 1
+        } else if (arr[mid] < target) {
+            left = mid + 1
+        } else {
             return true
         }
     }
@@ -187,11 +181,11 @@ function binarySearch(arr,target){
 
 // 53. 最大子数组和
 // https://leetcode.cn/problems/maximum-subarray/description/
-var maxSubArray = function(nums){
-    let pre=0, maxNum = nums[0]
-    nums.forEach(item=>{
-        pre = Math.max(item, pre+item)
-        maxNum = Math.max(pre,maxNum)
+var maxSubArray = function (nums) {
+    let pre = 0, maxNum = nums[0]
+    nums.forEach(item => {
+        pre = Math.max(item, pre + item)
+        maxNum = Math.max(pre, maxNum)
     })
     return maxNum
 }

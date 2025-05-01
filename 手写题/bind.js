@@ -15,3 +15,8 @@ Function.prototype.myBind = function (context, ...args) {
     return self.apply(context, [...args, ...newArgs]);
   };
 };
+
+scrollTop
+innerHeight
+
+offsetTop

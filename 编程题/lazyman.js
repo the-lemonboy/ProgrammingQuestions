@@ -63,7 +63,6 @@ LazyMan.prototype.next = function(){
 }
 
 
-
 // -------------   法二
 class LazyManClass {
     constructor(name) {
@@ -75,7 +74,6 @@ class LazyManClass {
         console.log(`Hi! This is ${name}!`);
         this.next();
       });
-  
       // 异步执行任务队列
       setTimeout(() => this.next(), 0);
     }

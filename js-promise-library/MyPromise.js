@@ -41,7 +41,7 @@ class MyPromise {
 
   #onSuccess(value) {
     queueMicrotask(() => {
-      // 为什么要这一步？
+      // 为什么要这一步？ 不是pending说明已经执行过了
       if (this.#state !== STATE.PENDING) return
 
 

@@ -1,4 +1,3 @@
-const { object } = require("uview-plus/libs/function/test");
 
 function enhancedFetch(url, options = {}, timeout = 5000, retryCount = 3, retryDelay = 1000) {
   // 超时逻辑：返回一个可用于超时的 Promise

@@ -74,6 +74,7 @@ get(obj, 'a.b.c.0') // 1
 get(obj, 'a.b.c[1]') // 2
 get(obj, ['a', 'b', 'c', '2']) // 3
 get(obj, 'a.b.c[3]') // undefined
+get(obj, 'a.c', 'bfe') // 'bfe'
 console.log(  get(obj, ['a', 'b', 'c', '2']) )// 'bfe'
 
 //  // 法二

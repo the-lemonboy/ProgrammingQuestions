@@ -31,3 +31,19 @@ function handelValue(arr, length) {
 let version1 = "1.10.10_beta", version2 = "1.10.9";
 
 console.log(compareVersions(version1, version2)); // -1
+
+
+
+function easyVersionCompare(v1, v2) {
+    let v1Arr = v1.split('.')
+    let v2Arr = v2.split('.')
+    let maxLen = Math.max(v1Arr.length,v2Arr.length)
+    for(let i=0; i<maxLen; i++){
+        let v1Item = +v1Arr[i] || 0
+        let v2Item = +v2Arr[i] || 0
+        if(v1Item === v2Item) continue
+        else if(v1Item > v2Item) return 1
+        else return -1
+    }
+    return 0
+}

@@ -13,13 +13,3 @@ const observer = new IntersectionObserver((entries) =>{
   root: document.querySelector('.root')
 })
 imgList.forEach(img => observer.observe(img))
-
-const Observer = new IntersectionObserver((entries=>{
-  entries.forEach(item=>{
-    if(item.isIntersecting){
-      item.target.src = item.target.dateset.src
-      observer.unobserve(item.target)
-    }
-  })
-}))
-

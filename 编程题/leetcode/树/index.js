@@ -24,6 +24,7 @@ const tree1 = {
 
 // https://leetcode.cn/problems/invert-binary-tree/description/
 // 翻转二叉树
+// 后序遍历
 var invertTree = function (root) {
   // 终止条件
   if (!root) {

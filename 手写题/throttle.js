@@ -66,7 +66,6 @@ function throttle(func, wait, option = {leading: true, trailing: true}) {
         }else{
           waiting = false;
         }
-        
       }, wait);
       if(option.leading) {
         func.apply(this, args);
@@ -82,33 +81,16 @@ function throttle(func, wait, option = {leading: true, trailing: true}) {
 }
 
 
-function throttle(fn,wait,option = { leading: true, trailing: true}){
-   let timer = null
-   let wait = false
-   let lastArgs = null
-   const {leading,trailing} = option
-   return function (...args){
+
+function throttle(fn,delay){
+  let timer = null
+  return function(...args){
     let context = this
-      if(!wait){
-       const timer = () => setTimeout(()=>{
-        if(trailing && lastArgs){
-          fn.call(context, ...lastArgs)
-          lastArgs = null
-          timer()
-        }else{
-          wait = false
-        }
-       })
-       if(leading){
+    if(!timer){
+      timer = setTimeout(()=>{
         fn.call(context,...args)
-       }else{
-         lastArgs = args
-       }
-       timer()
-      }else{
-        lastArgs = args
-      }
-   }
+        timer = null
+      },delay)
+    }
+  }
 }
-
-

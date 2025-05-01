@@ -26,3 +26,11 @@ function shallowClone(obj) {
     }
     return newObj;
 }
+
+
+function arrToTree(arr){
+    const map = new Map()
+    arr.forEach(item=>{
+        item.
+    })
+}

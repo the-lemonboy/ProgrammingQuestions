@@ -9,6 +9,21 @@ function myNew(fn, ...args) {
     return result instanceof Object ? result : obj
   }
 // 方法二
+// function A() {
+//   this.name = 'A'
+// }
+// function B() {
+//   this.name = 'B'
+//   return { msg: 'I override' }
+// }
+// function C() {
+//   this.name = 'C'
+//   return 'hello'
+// }
+
+// console.log(new A()) // { name: 'A' }
+// console.log(new B()) // { msg: 'I override' }
+// console.log(new C()) // { name: 'C' }，'hello' 被忽略
   function mynew(Func, ...args) {
     // 1.创建一个新对象
     const obj = {}
@@ -19,7 +34,7 @@ function myNew(fn, ...args) {
     // 4.根据返回值判断
     return result instanceof Object ? result : obj
 }
-
+ 
 
 // 法二  推荐
 function myObjectCreate(proto){
