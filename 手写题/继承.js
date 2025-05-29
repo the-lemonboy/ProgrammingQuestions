@@ -78,25 +78,29 @@ child1.sayHello(); // Hello, Tom
 // ❌ 子类原型上的方法是多余的（它们是从父类实例继承来的，而不是直接来自 Parent.prototype）  
 
 
-// 4. 原型式继承（Prototype Delegation）
-// 核心思想：用 Object.create 创建新对象
-// 优点
-// ✅ 代码简洁，直接创建对象继承父类
-// ✅ 方法共享（不会影响内存）  
-// 缺点
-// ❌ 引用类型共享问题（多个子对象修改 colors 会互相影响）
-// ❌ 不能传参  
-const parent = {
-  name: "Jack",
-  colors: ["red", "blue", "green"],
-  sayHello() {
-    console.log("Hello, " + this.name);
-  }
+// 4. 4️⃣ 寄生组合继承（推荐 ES5 中的最佳实践）
+// ✅ 优点：
+// 	•	不会重复调用父构造函数；
+// 	•	完整继承原型和构造函数属性；
+// 	•	性能优、结构清晰。
+
+// ❌ 缺点：
+// 	•	实现稍复杂。
+function Parent(name) {
+  this.name = name;
+  this.colors = ['red', 'green'];
+}
+Parent.prototype.sayName = function () {
+  console.log(this.name);
 };
 
-const child1 = Object.create(parent);
-child1.name = "Tom";
-child1.colors.push("black");
+function Child(name) {
+  Parent.call(this, name);
+}
 
-const child2 = Object.create(parent);
-console.log(child2.colors); // ["red", "blue", "green", "black"]
+// 关键点：创建一个干净的对象继承父原型，不调用构造函数
+Child.prototype = Object.create(Parent.prototype);
+Child.prototype.constructor = Child;
+
+const child = new Child('child');
+child.sayName(); // 'child'

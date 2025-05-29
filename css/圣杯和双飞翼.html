@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header"></div>
+        <div class="main">
+            <div class="center">
+                <div class="inner">asdfa</div>
+            </div>
+            <div class="left">left</div>
+            <div class="right">right</div>
+        </div>
+        <div class="footer"></div>
+    </div>
+</body>
+<style>
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        width: 100%;
+    }
+
+    .header,
+    .footer {
+        height: 100px;
+    }
+
+    .header {
+        background-color: aquamarine;
+    }
+
+    .footer {
+        background-color: blue;
+    }
+
+    /* 双飞翼 */
+    .main {
+        overflow: hidden;
+        /* 清除浮动 */
+    }
+
+    .left,
+    .right {
+        width: 200px;
+        height: 600px;
+        float: left;
+    }
+
+    .left {
+        margin-left: -100%;
+        background-color: #9f6722;
+    }
+
+    .right {
+        float: right;
+        margin-left: -200px;
+        background-color: brown;
+    }
+
+    .center {
+        float: left;
+        width: 100%;
+        height: 600px;
+    }
+
+    .inner {
+        margin: 0 200px;
+        /* 留出左右边栏的空间 */
+        height: 100%;
+        background-color: #2adcdc;
+    }
+    /* 双飞翼 end */
+
+    /* 圣杯布局 */
+    /* .main {
+        width: 100vw;
+        height: 600px;
+        position: relative;
+        padding: 0 200px;
+        box-sizing: border-box;
+    }
+
+    .center {
+        background-color: rgb(42, 220, 220);
+        width: 100%;
+        height: 100%;
+    }
+
+    .left,
+    .right {
+        position: absolute;
+        top: 0;
+        width: 200px;
+        height: 100%;
+
+    }
+
+    .left {
+        left: 0;
+        background-color: rgb(159, 103, 34);
+    }
+
+    .right {
+        right: 0;
+        background-color: brown;
+    } */
+
+    /* 圣杯布局 end */
+</style>
+
+</html>
